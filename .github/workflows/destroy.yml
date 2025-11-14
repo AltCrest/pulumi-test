@@ -1,0 +1,35 @@
+# .github/workflows/destroy.yml
+
+# 1. Give it a clear name that will show up in the GitHub UI
+name: Destroy Infrastructure (Manual)
+
+# 2. IMPORTANT: Change the trigger to 'workflow_dispatch'
+# This makes the pipeline manual and adds a "Run workflow" button in the Actions tab.
+on:
+    workflow_dispatch:
+
+jobs:
+    pulumi-destroy: # Use a descriptive job name
+        name: pulumi-destroy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js 18
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+
+            - name: Install Dependencies
+              working-directory: ./static-website-aws-typescript
+              run: npm install
+
+            - uses: pulumi/actions@v5
+              with:
+                  # 3. The core change: set the command to 'destroy'
+                  command: destroy
+                  stack-name: AltCrest-org/static-website-aws-typescript/dev
+                  work-dir: ./static-website-aws-typescript
+              env:
+                  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
