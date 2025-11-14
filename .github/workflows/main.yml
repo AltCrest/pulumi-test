@@ -22,8 +22,8 @@ jobs:
         with:
           # Note: Changed command to 'up' for a typical deployment
           command: up
-          stack-name: Stacks / static-website-aws-typescript / dev
-          work-dir: ./stacks/static-website-aws-typescript
+          stack-name: Stacks/static-website-aws-typescript/dev
+          work-dir: ./static-website-aws-typescript
         env:
           # This is still required to authenticate to Pulumi Cloud
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
