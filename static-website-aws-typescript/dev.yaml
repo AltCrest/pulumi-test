@@ -1,0 +1,20 @@
+# dev.yaml
+environment:
+    # Define the dynamic AWS login using OIDC
+    aws:
+        login:
+            fn::open::aws-login:
+                oidc:
+                    # Replace with the ARN of the IAM Role you created in Step 1.
+                    roleArn: "arn:aws:iam::<YOUR_ACCOUNT_ID>:role/PulumiESC-OIDC-Role"
+                    duration: 1h # Session duration
+
+    # Define the AWS Region config for the Pulumi project
+    config:
+        aws:region: us-east-1 
+        
+    # Expose the temporary AWS credentials as environment variables
+    environmentVariables:
+        AWS_ACCESS_KEY_ID: ${aws.login.accessKeyId}
+        AWS_SECRET_ACCESS_KEY: ${aws.login.secretAccessKey}
+        AWS_SESSION_TOKEN: ${aws.login.sessionToken}
