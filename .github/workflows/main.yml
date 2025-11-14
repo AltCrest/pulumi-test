@@ -1,6 +1,4 @@
-# main.yaml (OIDC-enabled version)
-
-name: main
+name: Pulumi Deploy
 
 on:
   push:
@@ -16,14 +14,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ... (Node.js and Install steps remain the same) ...
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        working-directory: ./static-website-aws-typescript
+        run: npm install
 
       - uses: pulumi/actions@v5
         with:
-          # Note: Changed command to 'up' for a typical deployment
           command: up
-          stack-name: dev
+          stack-name: AltCrest-org/static-website-aws-typescript/dev
           work-dir: ./static-website-aws-typescript
         env:
-          # This is still required to authenticate to Pulumi Cloud
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
