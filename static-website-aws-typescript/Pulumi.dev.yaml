@@ -3,3 +3,5 @@ config:
   static-website-aws-typescript:errorDocument: error.html
   static-website-aws-typescript:indexDocument: index.html
   static-website-aws-typescript:path: ./www
+environment:
+  - AltCrest-org/dev 
