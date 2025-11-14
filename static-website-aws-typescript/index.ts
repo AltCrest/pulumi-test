@@ -67,7 +67,7 @@ const cdn = new aws.cloudfront.Distribution("cdn", {
         defaultTtl: 600,
         maxTtl: 600,
         minTtl: 600,
-        forwardedValues: {
+        forwardedValues: { 
             queryString: true,
             cookies: {
                 forward: "all",
