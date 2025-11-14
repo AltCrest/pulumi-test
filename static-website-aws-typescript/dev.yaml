@@ -1,17 +1,16 @@
-# dev.yaml
-environment:
-    # Define the dynamic AWS login using OIDC
+# dev.yaml (Corrected for local use and version control)
+values:
     aws:
         login:
             fn::open::aws-login:
                 oidc:
-                    # Replace with the ARN of the IAM Role you created in Step 1.
                     roleArn: "arn:aws:iam::380270640472:role/PulumiESC-OIDC-Role"
-                    duration: 1h # Session duration
+                    sessionName: "github-actions"
+                    duration: 1h
 
-    config:
-        aws:region: us-west-1 
-        
+    pulumiConfig:
+        aws:region: us-west-1
+
     environmentVariables:
         AWS_ACCESS_KEY_ID: ${aws.login.accessKeyId}
         AWS_SECRET_ACCESS_KEY: ${aws.login.secretAccessKey}
