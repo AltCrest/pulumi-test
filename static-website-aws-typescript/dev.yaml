@@ -9,11 +9,9 @@ environment:
                     roleArn: "arn:aws:iam::380270640472:role/PulumiESC-OIDC-Role"
                     duration: 1h # Session duration
 
-    # Define the AWS Region config for the Pulumi project
     config:
         aws:region: us-west-1 
         
-    # Expose the temporary AWS credentials as environment variables
     environmentVariables:
         AWS_ACCESS_KEY_ID: ${aws.login.accessKeyId}
         AWS_SECRET_ACCESS_KEY: ${aws.login.secretAccessKey}
