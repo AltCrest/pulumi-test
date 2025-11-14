@@ -6,7 +6,7 @@ environment:
             fn::open::aws-login:
                 oidc:
                     # Replace with the ARN of the IAM Role you created in Step 1.
-                    roleArn: "arn:aws:iam::<YOUR_ACCOUNT_ID>:role/PulumiESC-OIDC-Role"
+                    roleArn: "arn:aws:iam::380270640472:role/PulumiESC-OIDC-Role"
                     duration: 1h # Session duration
 
     # Define the AWS Region config for the Pulumi project
